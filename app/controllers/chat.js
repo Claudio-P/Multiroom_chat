@@ -9,5 +9,10 @@ module.exports.startChat = function(app, req, res) {
 
     if(error) return res.render('index', { validation : error });
 
+    app.get('io').emit(
+        'msgToClient',
+        { apelido : formData.apelido, message: ' acabou de entrar no chat! ' }
+        );
+
     res.render('chat');
 };
