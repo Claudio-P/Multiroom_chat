@@ -83,37 +83,32 @@
 				<div class="col-md-10">
 					<span class="participante">
 						<img src="images/ico_usuario.png" />
-						Jorge
+						
 					</span>
 					
 					<span class="participante">
 						<img src="images/ico_usuario.png" />
-						José
 					</span>
-					
 					<span class="participante">
 						<img src="images/ico_usuario.png" />
-						Fernando
 					</span>
 				</div>
 				<div class="col-md-1"></div>
-                
             </div>
         </div>
 		
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				<div class="panel-body campo-mensagem">
-					<form>
-						<div class="col-md-12">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Mensagem">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">></button>
-								</span>
-							</div>
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Mensagem" id="message">
+							<input type="hidden" value="<%=formData.apelido%>" id="apelido">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="enviar-mensagem">></button>
+							</span>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</nav>		
@@ -124,6 +119,14 @@
 		<script>
 
 			const socket = io('http://localhost:3000');
+
+			$('#enviar-mensagem').click(() => {
+				
+				socket.emit(
+					'msgToServer',
+					{ apelido : $('#apelido').val(), message : $('#message').val() }
+				);
+			});
 
 			socket.on('msgToClient', (data) => {
 				var html = '';

@@ -14,5 +14,5 @@ module.exports.startChat = function(app, req, res) {
         { apelido : formData.apelido, message: ' acabou de entrar no chat! ' }
         );
 
-    res.render('chat');
+    res.render('chat', { formData : formData });
 };

@@ -14,4 +14,11 @@ io.on('connection', (socket) => {
     socket.on('disconnect', (sokcet) => {
         console.log('Usuário disconectado!');
     });
+
+    socket.on('msgToServer', (data) => {
+        socket.emit('msgToClient', { apelido : data.apelido, message : data.message });
+
+        socket.broadcast.emit('msgToClient', { apelido : data.apelido, message : data.message });
+    });
+
 });
